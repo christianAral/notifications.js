@@ -4,6 +4,15 @@ This is a simple, lightweight JavaScript library for generating and managing not
 
 ## Usage
 
+### Add To Your Webpage
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/christianAral/notifications.js@v1.0.0/notifications.min.css">
+```
+```html
+<script src="https://cdn.jsdelivr.net/gh/christianAral/notifications.js@v1.0.0/notifications.min.js"></script>
+```
+
+### Use the Notifications() class
 ```javascript
 const notifications = new Notifications();
 ```
