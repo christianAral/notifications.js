@@ -59,7 +59,7 @@ class Notifications {
         }
         newCard.querySelector(".notifTitle").textContent = title;
         newCard.querySelector(".notifTime").textContent = this._formatDate();
-        if (type == 'LINK' && href !== undefined) {
+        if (href !== undefined) {
             const a = document.createElement('a');
             a.href = href;
             a.innerText = description;
