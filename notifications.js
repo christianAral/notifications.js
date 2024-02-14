@@ -11,7 +11,6 @@ class Notifications {
         clearAllButton.textContent = "Clear All Notifications";
         clearAllButton.addEventListener('click', () => {
             Array.from(document.querySelectorAll(`#${this.id}>.notification`)).forEach(el => el.remove());
-            clearAllButton.style.display = 'none';
         });
 
         this.container.appendChild(clearAllButton);
@@ -63,13 +62,9 @@ class Notifications {
 
         newCard.querySelector('.notifClose').addEventListener('click', function(event) {
             event.target.closest(".notification").remove();
-            if (document.querySelectorAll(`#${this.id}>.notification`).length === 0) {
-                document.getElementById('notifClearAll').style.display = 'none';
-            }
         }.bind(this));
 
         this.container.appendChild(newCard.firstElementChild);
-        document.getElementById('notifClearAll').style.display = 'block';
     }
 }
 
