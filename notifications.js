@@ -1,7 +1,7 @@
 class Notifications {
     constructor() {
         this.templates = {};
-        this.id = `n${this.generateID(8)}`;
+        this.id = `n${this._generateID(8)}`;
         this.container = document.createElement('div');
         this.container.id = this.id;
         this.container.classList.add("notifications");
@@ -29,7 +29,7 @@ class Notifications {
             </div>`;
     }
 
-    generateID(N) {
+    _generateID(N) {
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         var result = '';
         for (var i = 0; i < N; i++) {
@@ -38,7 +38,7 @@ class Notifications {
         return result;
     }
 
-    formatDate() {
+    _formatDate() {
         const date = new Date();
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -47,18 +47,27 @@ class Notifications {
         return `${year}-${month}-${day} ${timeString}`;
     }
 
-    addCard(title, description, type) {
+    addCard(title, description, type, href) {
         let newCard = document.createElement('div');
         newCard.innerHTML = this.templates.card;
+        type = type === undefined ? 'INFO' : type.toUpperCase();
 
-        if (["Error", "Warning"].includes(type)) {
+        if (["ERROR", "WARNING"].includes(type)) {
             newCard.firstElementChild.classList.add(`notifStatus${type}`);
         } else {
-            newCard.firstElementChild.classList.add("notifStatusInfo");
+            newCard.firstElementChild.classList.add("notifStatusINFO");
         }
         newCard.querySelector(".notifTitle").textContent = title;
-        newCard.querySelector(".notifBody").textContent = description;
-        newCard.querySelector(".notifTime").textContent = this.formatDate();
+        newCard.querySelector(".notifTime").textContent = this._formatDate();
+        if (type == 'LINK' && href !== undefined) {
+            const a = document.createElement('a');
+            a.href = href;
+            a.innerText = description;
+            a.target = "_blank";
+            newCard.querySelector(".notifBody").appendChild(a);
+        } else {
+            newCard.querySelector(".notifBody").textContent = description;
+        }
 
         newCard.querySelector('.notifClose').addEventListener('click', function(event) {
             event.target.closest(".notification").remove();
