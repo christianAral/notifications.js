@@ -1,5 +1,5 @@
 .notifications {
-  position: absolute;
+  position: fixed;
   width: 25em;
   right: 0;
   top: 0;
